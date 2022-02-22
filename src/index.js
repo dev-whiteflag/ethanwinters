@@ -9,14 +9,14 @@ const app = express();
 const port = process.env.EW_API_PORT;
 
 const client = new DiscordClient().get();
-const startupService = new StartupService({ client, app });
+const startupService = new StartupService({ discordClient: client, expressApi: app });
 
 client.once('ready', () => {
-    log.info('Ethan Winters BOT is Ready to Work.');
+    log.info('BOT is Ready to Work.');
 });
 
 app.listen(port, () => {
-    log.info(`Ethan Winters API listening on port ${port}.`)
+    log.info(`API listening on port ${port}.`)
 });
 
 startupService.start();

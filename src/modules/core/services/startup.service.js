@@ -1,21 +1,19 @@
 const Logger = require('./logger.service');
-const CommandsDeployer = require("../commands.deployer");
+const CommandsService = require("./commands.service");
+const EventsService = require("./events.service");
 
 class StartupService {
     constructor({ discordClient, expressApi }) {
         this.client = discordClient;
         this.express = expressApi;
         this.log = new Logger().get();
-        this.commandDeployer = new CommandsDeployer({ discordClient });
+        this.commandService = new CommandsService({ logger: this.log, discordClient: this.client });
+        this.eventService  = new EventsService({ logger: this.log, discordClient: this.client });
     }
 
     start() {
-       this.setupDiscordEvents();
-       this.commandDeployer.register();
-    }
-
-    setupDiscordEvents() {
-        this.log.info("Setting Discord Events...");
+       this.commandService.register();
+       this.eventService.register();
     }
 }
 
