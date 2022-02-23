@@ -1,7 +1,7 @@
 const wait = require('util').promisify(setTimeout);
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const UberduckService = require("../services/uberduck.service");
-const Logger = require('../services/logger.service');
+const Logger = require('../config/logger.pino');
 const S3Service = require("../services/s3.service");
 
 const logger = new Logger().get();

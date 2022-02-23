@@ -8,16 +8,16 @@ class CommandsService {
         this.log = logger;
         this.client = discordClient;
         this.client.commands = new Collection();
-        this.absolutePath = './src/modules/core/commands';
+        this.absolutePath = './src/commands';
         this.relativePath = '../commands';
         this.commandFiles = this.retrieve();
         this.commandsJson = [];
     }
 
     register() {
-        this.log.info('Registering slash commands...');
+        this.log.info('[cmds] Registering slash commands...');
         for (const file of this.commandFiles) {
-            this.log.info(`Registering ${file} slash command...`);
+            this.log.info(`[cmds] Registering ${file} slash command.`);
             const command = require(`${this.relativePath}/${file}`);
             this.client.commands.set(command.data.name, command);
             this.commandsJson.push(command.data.toJSON());
@@ -27,8 +27,9 @@ class CommandsService {
 
     sendRest() {
         const rest = new REST({ version: '9' }).setToken(process.env.EW_DISCORD_TOKEN);
-        rest.put(Routes.applicationGuildCommands('868262375021768754', '677562040658690078'), { body: this.commandsJson })
-            .then(() => this.log.info('Registered all slash commands successfully.'))
+        rest.put(Routes.applicationGuildCommands(process.env.EW_DISCORD_APP_ID, process.env.EW_DISCORD_APP_GUILD_ID),
+            { body: this.commandsJson })
+            .then(() => this.log.info('[cmds] Registered all slash commands successfully.'))
             .catch(this.log.error);
     }
 
