@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
-const DiscordClient = require('./modules/core/client.discord');
-const StartupService = require("./modules/core/services/startup.service");
-const Logger = require('./modules/core/services/logger.service');
+const DiscordClient = require('./config/client.discord');
+const StartupService = require("./services/startup.service");
+const Logger = require('./services/logger.service');
 
 const log = new Logger().get();
 const app = express();
