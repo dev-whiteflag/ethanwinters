@@ -16,6 +16,10 @@ class S3Service {
         }
     }
 
+    async getObjectPath(fileName) {
+        const path = `http://${process.env.EW_S3_BUCKET}.s3.${process.env.EW_S3_REGION}.amazonaws.com/${fileName}`;
+    }
+
     async createBucket() {
         await this.client.createBucket({ Bucket: process.env.EW_S3_BUCKET }, function (err, data) {
             if (err) {
@@ -26,14 +30,15 @@ class S3Service {
         }).promise();
     }
 
-    checkIfCacheExists(fileName) {
-        return this.client.listObjects({ Bucket: process.env.EW_S3_BUCKET }, function(err, data) {
+    async checkIfCacheExists(fileName) {
+        const files = await this.client.listObjects({ Bucket: process.env.EW_S3_BUCKET }, function(err, data) {
             if (err) {
                 this.log.error(err);
             } else {
-                this.log.info(data.Contents);
+                return data.Contents;
             }
-        });
+        }).promise();
+        return files.Contents.find(file => file === fileName.trim()) !== undefined;
     }
 
      async checkIfBucketExists() {

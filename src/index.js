@@ -5,6 +5,9 @@ const StartupService = require("./services/startup.service");
 const Logger = require('./config/logger.pino');
 
 const log = new Logger().get();
+
+log.info('[main] Ethan Winters is Starting...');
+
 const app = express();
 const port = process.env.EW_API_PORT;
 

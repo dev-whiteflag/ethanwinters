@@ -6,8 +6,11 @@ WORKDIR /usr/ethanwinters
 # Copy source to container
 COPY ../* ./
 
-# Install dependencies
+# Install npm dependencies
 RUN npm install
+
+# Install system dependencies
+RUN apk add ffmpeg
 
 # Expose ports and run app
 EXPOSE 3000
