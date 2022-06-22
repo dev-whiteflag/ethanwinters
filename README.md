@@ -1,13 +1,11 @@
 
-# Ethan Winter `discord bot`
+# Ethan Winters `discord bot`
 
-## Functionalities
+## Environment Variables
 
-- randomly curse someone with a low chance of happening
-- read as gotox (reinhert overwatch) (!gotox)
-- tell gotox stories as Iberê (!conta)
-- enter voice chat, speak, disconnect gotox (!desconecta)
-
-## Tech Functionalities
-
-- save generated audio on S3
+- `EW_API_PORT` 
+- `EW_DISCORD_TOKEN`
+- `EW_S3_REGION`
+- `EW_S3_BUCKET` (temporary)
+- `EW_DISCORD_APP_ID` (temporary)
+- `EW_DISCORD_APP_GUILD_ID` (temporary)

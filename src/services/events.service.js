@@ -11,10 +11,15 @@ class EventsService {
 
     register() {
         this.log.info('[events] Registering events...');
-        for (const file of this.eventFiles) {
-            this.log.info(`[events] Registering ${file} event.`);
-            const event = require(`${this.relativePath}/${file}`);
-            event.bind(this.client);
+
+        if (this.eventFiles.length === 0) {
+            this.log.info(`[events] No event was found!`);
+        } else {
+            for (const file of this.eventFiles) {
+                this.log.info(`[events] Registering ${file} event.`);
+                const event = require(`${this.relativePath}/${file}`);
+                event.bind(this.client);
+            }
         }
     }
 

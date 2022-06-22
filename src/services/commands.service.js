@@ -16,13 +16,18 @@ class CommandsService {
 
     register() {
         this.log.info('[cmds] Registering slash commands...');
-        for (const file of this.commandFiles) {
-            this.log.info(`[cmds] Registering ${file} slash command.`);
-            const command = require(`${this.relativePath}/${file}`);
-            this.client.commands.set(command.data.name, command);
-            this.commandsJson.push(command.data.toJSON());
+
+        if (this.commandFiles.length === 0) {
+            this.log.info(`[cmds] No slash command was found!`);
+        } else {
+            for (const file of this.commandFiles) {
+                this.log.info(`[cmds] Registering ${file} slash command.`);
+                const command = require(`${this.relativePath}/${file}`);
+                this.client.commands.set(command.data.name, command);
+                this.commandsJson.push(command.data.toJSON());
+            }
+            this.sendRest();
         }
-        this.sendRest();
     }
 
     sendRest() {

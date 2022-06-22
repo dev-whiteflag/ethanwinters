@@ -17,11 +17,11 @@ class S3Service {
     }
 
     async getObjectPath(fileName) {
-        const path = `http://${process.env.EW_S3_BUCKET}.s3.${process.env.EW_S3_REGION}.amazonaws.com/${fileName}`;
+        const path = `https://${process.env.EW_S3_BUCKET}.s3.${process.env.EW_S3_REGION}.amazonaws.com/${fileName}`;
     }
 
     async createBucket() {
-        await this.client.createBucket({ Bucket: process.env.EW_S3_BUCKET }, function (err, data) {
+        await this.client.createBucket({ Bucket: process.env.EW_S3_BUCKET }, function (err) {
             if (err) {
                 this.log.error(`[s3] Error when creating Bucket: ${err.name}`);
             } else {
