@@ -36,7 +36,7 @@ class FrontendService {
                 resources: this.entities,
                 rootPath: '/manage',
                 branding: {
-                    companyName: 'Ethan Winters Dashboard',
+                    companyName: 'EW Dashboard',
                 }
             });
 

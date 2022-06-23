@@ -8,8 +8,8 @@ class CommandsService {
         this.log = logger;
         this.client = discordClient;
         this.client.commands = new Collection();
-        this.absolutePath = './src/commands';
-        this.relativePath = '../commands';
+        this.absolutePath = './src/commands/slash';
+        this.relativePath = '../commands/slash';
         this.commandFiles = this.retrieve();
         this.commandsJson = [];
     }
