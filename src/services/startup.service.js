@@ -19,7 +19,7 @@ class StartupService {
         this.s3Service.initialize().then(() => this.log.info('[s3] S3 Service initialized successfully.'));
         this.commandService.register();
         this.eventService.register();
-        this.frontendService.initialize();
+        this.frontendService.registerResources();
     }
 }
 
